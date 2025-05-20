@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Globo Sonda</title>
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
 </head>
 <body>
@@ -19,62 +19,78 @@
         </a-assets>
 
         <!-- Modelo 3D del museo con todos los elementos en su interior -->
-        <a-entity gltf-model="#museo2-glb" scale="10 10 10" position="0 0 0" static-body>
-            <a-entity gltf-model="#Adrián_Santiago-glb" scale="9 9 9" position="80 75 -315" static-body></a-entity>
-            <a-entity gltf-model="#Victor_Ryan-glb" scale="7 7 7.6" position="180 75 -315" rotation="90 0 0" static-body></a-entity>
-            <a-entity gltf-model="#mural_Ainara-glb" scale="6 6 6.6" position="360 75 -100" rotation="90 -90 0" static-body></a-entity>
+        <a-entity 
+            gltf-model="#museo2-glb" 
+            scale="10 10 10" 
+            position="0 0 0" 
+            static-body>
+            <a-entity
+            gltf-model="#Adrián_Santiago-glb"
+            scale="9 9 9"
+            position=" 80 75 -315"
+            static-body>
+            </a-entity>
+            <a-entity
+            gltf-model="#Victor_Ryan-glb"
+            scale="7 7 7.6"
+            position="180 75 -315"
+            rotation="90 0 0"
+            static-body>
+            </a-entity>
+            <a-entity
+            gltf-model="#mural_Ainara-glb"
+            scale="6 6 6.6"
+            position="360 75 -100"
+            rotation="90 -90 0"
+            static-body>
+            </a-entity>
+
             <a-video src="#video_apagon-mp4" position="290 75 -315" autoplay loop muted scale="120 100 100"></a-video>
-        </a-entity>
+            
+            <!-- Cámara con controles móviles -->
+            <a-entity id="rig" position="50 50 0">
+                <a-entity 
+                    camera 
+                    look-controls 
+                    wasd-controls="acceleration: 400">
+                </a-entity>
 
-        <!-- Cámara con controles móviles -->
-        <a-entity id="rig" position="50 50 0">
-            <a-entity camera look-controls wasd-controls="acceleration: 400"></a-entity>
-            <a-light type="point" position="0 500 0" intensity="1" color="#FFFFFF"></a-light>
-        </a-entity>
+                <!-- Luz que sigue el movimiento del usuario -->
+                <a-light type="point" position="0 500 0" intensity="1" color="#FFFFFF"></a-light>
+            </a-entity>
+            
+            <!-- Permitir movimiento con orientación del dispositivo -->
+            <a-entity mobile-movement></a-entity>
 
-        <!-- Permitir movimiento con orientación del dispositivo -->
-        <a-entity mobile-movement></a-entity>
+            <!-- Script para movimiento con orientación del dispositivo -->
+            <script>
+                AFRAME.registerComponent('mobile-movement', {
+                    init: function () {
+                        const el = this.el;
+                        window.addEventListener('deviceorientation', function (event) {
+                            const beta = event.beta; // Inclinación frontal-trasera
+                            const gamma = event.gamma; // Inclinación lateral
 
-        <!-- Script para movimiento con sensores del dispositivo -->
-        <script>
-            AFRAME.registerComponent('mobile-movement', {
-                init: function () {
-                    const rig = document.querySelector("#rig");
+                            // Movimiento adelante/atrás
+                            if (beta > 15) {
+                                el.object3D.position.z -= 1;
+                            }
+                            if (beta < -15) {
+                                el.object3D.position.z += 1;
+                            }
 
-                    if (window.DeviceMotionEvent) {
-                        window.addEventListener("devicemotion", function (event) {
-                            let acceleration = event.accelerationIncludingGravity;
-
-                            // Movimiento adelante cuando el móvil se inclina
-                            if (acceleration.x > 1 || acceleration.y > 1) {
-                                rig.object3D.position.z -= 1;
+                            // Movimiento izquierda/derecha
+                            if (gamma > 10) {
+                                el.object3D.position.x += 1;
+                            }
+                            if (gamma < -10) {
+                                el.object3D.position.x -= 1;
                             }
                         });
                     }
-
-                    window.addEventListener('deviceorientation', function (event) {
-                        const beta = event.beta; // Inclinación frontal-trasera
-                        const gamma = event.gamma; // Inclinación lateral
-
-                        // Movimiento adelante/atrás
-                        if (beta > 15) {
-                            rig.object3D.position.z -= 1;
-                        }
-                        if (beta < -15) {
-                            rig.object3D.position.z += 1;
-                        }
-
-                        // Movimiento izquierda/derecha
-                        if (gamma > 10) {
-                            rig.object3D.position.x += 1;
-                        }
-                        if (gamma < -10) {
-                            rig.object3D.position.x -= 1;
-                        }
-                    });
-                }
-            });
-        </script>
+                });
+            </script>
+        </a-entity>
 
         <!-- Iluminación ambiente -->
         <a-light type="ambient" color="#FFFFFF" intensity="1"></a-light>
