@@ -54,25 +54,6 @@
                     look-controls 
                     wasd-controls="acceleration: 400">
                 </a-entity>
-                <a-entity
-	                id="rig"
-	                movement-controls="speed: 5"
-	                position="0 1.6 0">
-            <a-camera wasd-controls-enabled="false" look-controls></a-camera>
-                </a-entity>
-
-		    <script>
-			    AFRAME.registerComponent('auto-move', {
-				    tick: function () {
-					    const el = this.el:
-						    const direction = new THREE.Vector3();
-					    el.object3D.getWorldDirection(direction);
-					    el.objetc3D.position.add(direction.multiplyScalar(0.01)); //velocidad
-				    }
-			    });
-		    </script>
-
-		    <a-entity camera auto-move look.controls></a-entity>
 
                 <!-- Luz que sigue el movimiento del usuario -->
                 <a-light type="point" position="0 500 0" intensity="1" color="#FFFFFF"></a-light>
