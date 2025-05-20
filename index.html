@@ -54,6 +54,12 @@
                     look-controls 
                     wasd-controls="acceleration: 400">
                 </a-entity>
+                <a-entity
+	                id="rig"
+	                movement-controls="speed: 0.1"
+	                position="0 1.6 0">
+            <a-camera wasd-controls-enabled="false" look-controls></a-camera>
+                </a-entity>
 
                 <!-- Luz que sigue el movimiento del usuario -->
                 <a-light type="point" position="0 500 0" intensity="1" color="#FFFFFF"></a-light>
