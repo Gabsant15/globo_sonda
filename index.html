@@ -52,7 +52,7 @@
                 <a-entity 
                     camera 
                     look-controls 
-                    wasd-controls="acceleration: 400">
+                    wasdik-controls="acceleration: 400">
                 </a-entity>
 
                 <!-- Luz que sigue el movimiento del usuario -->
@@ -86,6 +86,12 @@
                             if (gamma < -10) {
                                 el.object3D.position.x -= 1;
                             }
+                            if (gamma > 15) {
+                                el.object3D.position.y += 1;
+                            }
+                            if (gamma < -15) {
+                                el.object3D.position.y -= 1;
+                            }
                         });
                     }
                 });
@@ -94,10 +100,10 @@
       if (window.DeviceMotionEvent) {
         window.addEventListener("devicemotion", function (event) {
           let acceleration = event.accelerationIncludingGravity;
-          let cameraRig = document.querySelector("#cameraRig");
+          let rig = document.querySelector("#rig");
 
-          if (acceleration.x > 1 || acceleration.y > 1) {
-            cameraRig.object3D.position.z -= 0.1; // Movimiento hacia adelante
+          if (acceleration.x > 10 || acceleration.y > 10) {
+            rig.object3D.position.z -= 10; // Movimiento hacia adelante
           }
         });
       }
