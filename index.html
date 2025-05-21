@@ -64,34 +64,32 @@
 
             <!-- Script para movimiento con orientación del dispositivo -->
             <script>
-                AFRAME.registerComponent('mobile-movement', {
-                    init: function () {
-                        const el = this.el;
-                        window.addEventListener('deviceorientation', function (event) {
-                            const beta = event.beta; // Inclinación frontal-trasera
-                            const gamma = event.gamma; // Inclinación lateral
+            AFRAME.registerComponent('mobile-movement', {
+    init: function () {
+        const el = this.el;
+        window.addEventListener('deviceorientation', function (event) {
+            const beta = event.beta; // Inclinación frontal-trasera
+            const gamma = event.gamma; // Inclinación lateral
 
-                            // Movimiento adelante/atrás
-                            if (beta > 15) {
-                                el.object3D.position.z -= 1;
-                            }
-                            if (beta < -15) {
-                                el.object3D.position.z += 1;
-                            }
+            // Movimiento adelante/atrás (multiplicamos por 3)
+            if (beta > 15) {
+                el.object3D.position.z -= 3;
+            }
+            if (beta < -15) {
+                el.object3D.position.z += 3;
+            }
 
-                            // Movimiento izquierda/derecha
-                            if (gamma > 10) {
-                                el.object3D.position.x += 1;
-                            }
-                            if (gamma < -10) {
-                                el.object3D.position.x -= 1;
-                            }
-                        });
-                    }
-                });
-            </script>
-            <script>
-            if (window.DeviceMotionEvent) {
+            // Movimiento izquierda/derecha (multiplicamos por 3)
+            if (gamma > 10) {
+                el.object3D.position.x += 3;
+            }
+            if (gamma < -10) {
+                el.object3D.position.x -= 3;
+            }
+        });
+    }
+});
+                if (window.DeviceMotionEvent) {
     window.addEventListener("devicemotion", function (event) {
         let acceleration = event.accelerationIncludingGravity;
         let rig = document.querySelector("#rig");
@@ -101,7 +99,8 @@
         }
     });
 }
-                </script>
+                    </script>
+
         </a-entity>
 
         <!-- Iluminación ambiente -->
