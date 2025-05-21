@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Globo Sonda</title>
+    <title>Globo Sonda mo</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
 </head>
@@ -96,18 +96,7 @@
                     }
                 });
             </script>
-             <script>
-      if (window.DeviceMotionEvent) {
-        window.addEventListener("devicemotion", function (event) {
-          let acceleration = event.accelerationIncludingGravity;
-          let rig = document.querySelector("#rig");
 
-          if (acceleration.x > 10 || acceleration.y > 10) {
-            rig.object3D.position.z -= 10; // Movimiento hacia adelante
-          }
-        });
-      }
-    </script>
         </a-entity>
 
         <!-- Iluminación ambiente -->
