@@ -90,18 +90,18 @@
                     }
                 });
             </script>
-<script>
-      if (window.DeviceMotionEvent) {
-        window.addEventListener("devicemotion", function (event) {
-          let acceleration = event.accelerationIncludingGravity;
-          let rig = document.querySelector("#rig");
+            <script>
+            if (window.DeviceMotionEvent) {
+    window.addEventListener("devicemotion", function (event) {
+        let acceleration = event.accelerationIncludingGravity;
+        let rig = document.querySelector("#rig");
 
-          if (acceleration.x > 10 || acceleration.y > 10) {
-            rig.object3D.position.z -= 0.5; // Movimiento hacia adelante
-          }
-        });
-      }
-    </script>
+        if (acceleration.x > 10 || acceleration.y > 10) {
+            rig.object3D.position.z -= 1.5; // Antes era 0.5, ahora es 3 veces más rápido
+        }
+    });
+}
+                </script>
         </a-entity>
 
         <!-- Iluminación ambiente -->
