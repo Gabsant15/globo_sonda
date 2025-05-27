@@ -6,6 +6,7 @@
     <title>Globo Sonda</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@latest/dist/aframe-physics-system.min.js"></script>
 </head>
 <body>
     <a-scene vr-mode-ui="enabled: true">
@@ -66,7 +67,8 @@
             <a-video src="#En ponencia_ El-Gran-Apagon-mp4" position="23 75 -230" rotation="0 90 0" autoplay loop muted scale="120 100 100"></a-video>
             
             <!-- Cámara con controles móviles -->
-            <a-entity id="rig" position="50 50 0">
+            <a-entity id="rig" movement-controls dynamic-body position="50 50 0">
+                <a-entity id="museo" gltf-model="museo2.glb" static-body></a-entity>
                 <a-entity 
                     camera 
                     look-controls 
