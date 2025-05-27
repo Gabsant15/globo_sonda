@@ -91,18 +91,18 @@
 
             // Movimiento adelante/atrás (multiplicamos por 3)
             if (beta > 15) {
-                el.object3D.position.z -= 5;
+                el.object3D.position.z -= 10;
             }
             if (beta < -15) {
-                el.object3D.position.z += 5;
+                el.object3D.position.z += 10;
             }
 
             // Movimiento izquierda/derecha (multiplicamos por 3)
             if (gamma > 10) {
-                el.object3D.position.x += 5;
+                el.object3D.position.x += 10;
             }
             if (gamma < -10) {
-                el.object3D.position.x -= 5;
+                el.object3D.position.x -= 10;
             }
         });
     }
@@ -113,7 +113,7 @@
         let rig = document.querySelector("#rig");
 
         if (acceleration.x > 10 || acceleration.y > 10) {
-            rig.object3D.position.z -= 2.5; // Antes era 0.5, ahora es 3 veces más rápido
+            rig.object3D.position.z -= 5.5; // Antes era 0.5, ahora es 3 veces más rápido
         }
     });
 }
