@@ -15,8 +15,8 @@
     <a-asset-item id="museo2-glg" src="museo2.glb"></a-asset-item>
   </a-assets>
 
-  <a-entity id="rig" camera position="50 50 0"
-            wasd-controls dynamic-body></a-entity>
+  <a-entity id="rig" camera look-controls position="50 50 0"
+            wasd-controls="acceleration: 400"> dynamic-body></a-entity>
 </a-scene>
 
         <!-- Carga de modelos -->
@@ -74,13 +74,6 @@
 
             <a-video src="#video_apagon-mp4" position="290 75 -315" autoplay loop muted scale="120 100 100"></a-video>
             <a-video src="#En ponencia_ El-Gran-Apagon-mp4" position="23 75 -230" rotation="0 90 0" autoplay loop muted scale="120 100 100"></a-video>
-            
-            <!-- Cámara con controles móviles -->
-                 <a-entity id="rig" position="50 50 0">
-                     <a-entity
-                         camera 
-                    look-controls 
-                wasd-controls="acceleration: 400"> nav-agent></a-entity>
 
                 <!-- Luz que sigue el movimiento del usuario -->
                 <a-light type="point" position="0 500 0" intensity="1" color="#FFFFFF"></a-light>
