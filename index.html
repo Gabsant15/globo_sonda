@@ -10,10 +10,6 @@
 </head>
 <body>
     <a-scene vr-mode-ui="enabled: true">
-         <a-entity id="navmesh" geometry="primitive: plane; width: 10; height: 10"
-                material="color: gray; opacity: 0.5"
-                position="0 0 0"
-                nav-mesh></a-entity>
         <a-scene physics="gravity: 0">
   <a-assets>
     <a-asset-item id="museo2-glg" src="museo2.glb"></a-asset-item>
@@ -39,11 +35,6 @@
         </a-assets>
 
         <!-- Modelo 3D del museo con todos los elementos en su interior -->
-        <a-entity 
-            gltf-model="#museo2-glb" 
-            scale="10 10 10" 
-            position="0 0 0" 
-            static-body>
             <a-entity
             gltf-model="#Adrián_Santiago-glb"
             scale="9 9 9"
