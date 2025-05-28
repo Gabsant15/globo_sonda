@@ -20,7 +20,6 @@
             <a-asset-item id="infografíaPF-glb" src="infografíaPF.glb"></a-asset-item>
             <a-asset-item id="En ponencia_ El-Gran-Apagon-mp4" src="En ponencia_ El-Gran-Apagon.mp4"></a-asset-item>
         </a-assets>
-        <a-scene physics="debug: true">
 
         <!-- Modelo 3D del museo con todos los elementos en su interior -->
         <a-entity 
@@ -67,7 +66,7 @@
             <a-video src="#En ponencia_ El-Gran-Apagon-mp4" position="23 75 -230" rotation="0 90 0" autoplay loop muted scale="120 100 100"></a-video>
             
             <!-- Cámara con controles móviles -->
-            <a-entity id="rig" movement-controls dynamic-body position="50 50 0">
+            <a-entity id="rig" position="50 50 0">
                 <a-entity 
                     camera 
                     look-controls 
