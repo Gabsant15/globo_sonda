@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Globo Sonda</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
 </head>
 <body>
     <a-scene vr-mode-ui="enabled: true">
+         <a-entity id="navmesh" geometry="primitive: plane; width: 10; height: 10"
+                material="color: gray; opacity: 0.5"
+                position="0 0 0"
+                nav-mesh></a-entity>
         <!-- Carga de modelos -->
         <a-assets>
             <a-asset-item id="museo2-glb" src="museo2.glb"></a-asset-item>
@@ -66,12 +71,11 @@
             <a-video src="#En ponencia_ El-Gran-Apagon-mp4" position="23 75 -230" rotation="0 90 0" autoplay loop muted scale="120 100 100"></a-video>
             
             <!-- Cámara con controles móviles -->
-            <a-entity id="rig" position="50 50 0">
-                <a-entity 
-                    camera 
+                 <a-entity id="rig" position="50 50 0">
+                     <a-entity
+                         camera 
                     look-controls 
-                    wasd-controls="acceleration: 400">
-                </a-entity>
+                wasd-controls="acceleration: 400"> nav-agent></a-entity>
 
                 <!-- Luz que sigue el movimiento del usuario -->
                 <a-light type="point" position="0 500 0" intensity="1" color="#FFFFFF"></a-light>
