@@ -21,7 +21,7 @@
             <a-asset-item id="En ponencia_ El-Gran-Apagon-mp4" src="En ponencia_ El-Gran-Apagon.mp4"></a-asset-item>
         </a-assets>
 
-        <!-- Modelo 3D del museo con todos los elementos en su interior -->
+        <!-- Modelo 3D del museo con elementos -->
         <a-entity 
             gltf-model="#museo2-glb" 
             scale="10 10 10" 
@@ -61,49 +61,38 @@
             rotation="90 0 0"
             static-body>
             </a-entity>
-
             <a-video src="#video_apagon-mp4" position="290 75 -315" autoplay loop muted scale="120 100 100"></a-video>
             <a-video src="#En ponencia_ El-Gran-Apagon-mp4" position="23 75 -250" rotation="0 90 0" autoplay loop muted scale="120 100 100"></a-video>
-            
-            <!-- Cámara con controles móviles -->
-            <a-entity id="rig" position="50 50 0">
-                <a-entity 
-                    camera 
-                    look-controls 
-                    wasd-controls="acceleration: 400">
-                </a-entity>
 
-                <!-- Luz que sigue el movimiento del usuario -->
+            <!-- Cámara y luz -->
+            <a-entity id="rig" position="50 50 0">
+                <a-entity camera look-controls wasd-controls="acceleration: 400"></a-entity>
                 <a-light type="point" position="0 500 0" intensity="1" color="#FFFFFF"></a-light>
             </a-entity>
-            
-            <!-- Permitir movimiento con orientación del dispositivo -->
-            <a-entity mobile-movement></a-entity>
 
-            <!-- Script para movimiento con orientación del dispositivo -->
+            <!-- Componente de movimiento GPS -->
+            <a-entity gps-movement></a-entity>
+
             <script>
-                AFRAME.registerComponent('mobile-movement', {
+                AFRAME.registerComponent('gps-movement', {
                     init: function () {
                         const el = this.el;
-                        window.addEventListener('deviceorientation', function (event) {
-                            const beta = event.beta; // Inclinación frontal-trasera
-                            const gamma = event.gamma; // Inclinación lateral
+                        let lastPosition = null;
+                        const scaleFactor = 3;
 
-                            // Movimiento adelante/atrás
-                            if (beta > 15) {
-                                el.object3D.position.z -= 1;
-                            }
-                            if (beta < -15) {
-                                el.object3D.position.z += 1;
+                        navigator.geolocation.watchPosition(function (position) {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
+
+                            if (lastPosition) {
+                                const deltaLat = lat - lastPosition.lat;
+                                const deltaLon = lon - lastPosition.lon;
+
+                                el.object3D.position.x += deltaLon * scaleFactor * 1000;
+                                el.object3D.position.z += deltaLat * scaleFactor * 1000;
                             }
 
-                            // Movimiento izquierda/derecha
-                            if (gamma > 10) {
-                                el.object3D.position.x += 1;
-                            }
-                            if (gamma < -10) {
-                                el.object3D.position.x -= 1;
-                            }
+                            lastPosition = { lat, lon };
                         });
                     }
                 });
