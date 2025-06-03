@@ -113,6 +113,19 @@
                         });
                     }
                 });
+                
+      document.addEventListener("keydown", function (event) {
+        let box = document.querySelector("#box");
+        let position = box.getAttribute("position");
+
+        if (event.key === "i") {
+          position.y += 0.1;
+        } else if (event.key === "k") {
+          position.y -= 0.1;
+        }
+
+        box.setAttribute("position", position);
+      });
             </script>
         </a-entity>
 
